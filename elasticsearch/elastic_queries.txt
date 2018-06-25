@@ -1,0 +1,56 @@
+Elasticsearch common operations
+
+Apply mappings and create index
+$ curl -H "Content-Type: application/json" -XPUT --data @elastic-mappings.json http://localhost:9200/vulnerabilities
+
+Delete index
+$ curl -XDELETE "http://localhost:9200/vulnerabilities"
+
+Get mapping
+$ curl -XGET 'http://localhost:9200/vulnerabilities/_mappings?pretty'
+
+Get indices
+$ curl -XGET "http://localhost:9200/_cat/indices?v"
+
+Get all records
+$ curl -H "Content-Type:application/json" -XGET http://localhost:9200/vulnerabilities/ssllabs/_search?pretty -d '
+{
+  "query": {
+          "match_all": {}
+  }
+}'
+
+Date query
+$ curl -H "Content-Type:application/json" -XGET http://localhost:9200/vulnerabilities/ssllabs/_search?pretty -d '
+{
+    "query": {
+        "range" : {
+            "ts" : {
+                "gte": "2018-01-15T06:35:00"
+            }
+        }
+    }
+}'
+
+Get all documents
+curl -H "Content-Type:application/json" -XGET http://localhost:9200/vulnerabilities/ssllabs/_search?pretty -d '
+{
+  "query": {
+          "match_all": {}
+  }
+}'
+
+Get exact date documents
+curl -H "Content-Type:application/json" -XGET http://localhost:9200/vulnerabilities/ssllabs/_search?pretty -d '
+{
+    "query": {
+       "term": { "ts" : "2018-01-15"}
+     }
+}'
+
+
+Elasticsearch related useful links
+https://marcobonzanini.com/2015/02/02/how-to-query-elasticsearch-with-python/
+https://bitquabit.com/post/having-fun-python-and-elasticsearch-part-1/
+
+

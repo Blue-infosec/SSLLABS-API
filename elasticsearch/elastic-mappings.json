@@ -1,0 +1,260 @@
+{
+    "template": "vulnerabilities",
+    "order" : "1",
+    "settings" : {
+      "index.refresh_interval" : "15s",
+      "index.number_of_shards": 2,
+      "index.number_of_replicas": 1
+    },
+    "mappings": {
+      "_default_": {
+        "properties": {
+            "@version" : { "type" : "keyword", "index" : false },
+            "SNI_support": { "type": "keyword" },
+            "assessment_status": { "type": "keyword" },
+            "assessment_time(hh:mm:ss)": {
+                    "type": "date",
+                    "format": "date_optional_time"
+              },
+          "beast": { "type": "keyword" },
+          "cert_alt_names": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cert_common_names": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cert_extended_validation": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cert_issuer_label": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cert_issuer_subject": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cert_revocation_status": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cert_signature_algo": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cert_subject": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cert_validity": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "certificate_sct_support": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "cipher_suites": {
+            "properties": {
+              "cipher_strength": {
+                "type": "long"
+              },
+              "name": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "crime": { "type": "keyword" },
+          "domain_delegation": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "forward_secrecy_support": { "type": "keyword" },
+          "freak": { "type": "keyword" },
+          "grade": { "type": "keyword" },
+          "grade_exceptional": {
+            "type": "boolean"
+          },
+          "grade_warnings": {
+            "type": "boolean"
+          },
+          "heartbleed": { "type": "keyword" },
+          "host": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "hsts_policy": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "insecure_client_renegotiation": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "ip": {
+            "type": "ip" },
+
+          "key_algorithm": {
+            "type": "long"
+          },
+          "key_size": {
+            "type": "long"
+          },
+          "key_strength": {
+            "type": "long"
+          },
+          "logjam": { "type": "keyword" },
+          "npn_protocols_support": { "type": "keyword" },
+          "ocsp_stapling_support": { "type": "keyword" },
+          "openssl_luckyminus": { "type": "keyword" },
+          "opensslccs": { "type": "keyword" },
+          "poodle": { "type": "keyword" },
+          "poodleTLS": {"type": "keyword" },
+          "port": { "type": "long" },
+          "protocol": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "rc4": {"type": "keyword" },
+          "rc4_only": {"type": "keyword" },
+          "secure_client_renegotiation": {"type": "keyword" },
+          "secure_renegotiation": {"type": "keyword" },
+          "secure_renegotiation_server_support": {"type": "keyword" },
+          "server_name": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "server_signature": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "session_resumption": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "session_tickets_support": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "sgrade": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "sig_algorithm_weak": {"type": "keyword" },
+          "ts": {
+            "type": "date"
+          }
+        }
+      }
+    }
+  }
+

@@ -1,0 +1,25 @@
+<!/DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title> Search SSL Labs report</title>
+<script type='text/jsvascript' src="{{ url_for('static',filename='js/jquery-3.3.1.min.js') }}"></script>
+
+<script type='text/javascript' src="{{ url_for('static',filename='js/jquery-ui.js') }}"></script>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/jquery-ui.css') }}">
+<script>
+ $( function() {
+     $( ".dtpick" ).datepicker();
+ });
+</script>
+
+</head>
+<body>
+    <form method="post" action="/search" name="search">
+	{{ form.hidden_tag() }}
+        <p> Server: {{ form.server(size=80) }} </p>
+	<p> Date: {{ form.dt(class="dtpick") }} </p>
+	<button type="submit"> Search </button>
+	</form>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>BTS Search results</title>
+<script src="{{ url_for('static',filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-grid.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-reboot.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dash.css') }}">
+
+
+</head>
+
+<body>
+<div class="container-fluid">
+    <h2> SSL Labs API HTTPS testing report </h2>
+
+	<!-- General settings -->
+    <div class="row">
+    <div class="col-md-12">
+	    <h3> General </h3>
+		<table class="table">
+		    <thead>
+			    <tr>
+				    <th>Name </th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr>
+				    <td>Host</td>
+					<td>{{elastic_report.host}}<td>
+				</tr>
+			    <tr>
+				    <td>IP</td>
+					<td>{{elastic_report.ip}}<td>
+				</tr>
+			    <tr>
+				    <td>Port</td>
+					<td>{{elastic_report.port}}<td>
+				</tr>
+			    <tr>
+				    <td>Protocol</td>
+					<td>{{elastic_report.protocol}}<td>
+				</tr>
+			    <tr>
+				    <td>Server Name</td>
+					<td>{{elastic_report.server_name}}<td>
+				</tr>
+			    <tr>
+				    <td>Server signature</td>
+					<td>{{elastic_report.server_signature}}<td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+
+	<!-- Scan details -->
+    <div class="row">
+    <div class="col-md-12">
+	    <h3> Scan details </h3>
+		<table class="table">
+		    <thead>
+			    <tr>
+				    <th>Name </th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr>
+				    <td>Assessment status</td>
+					<td>{{elastic_report.assessment_status}}</td>
+				</tr>
+			    <tr>
+				    <td>Time taken for assessment(hh:mm:ss)</td>
+					<td>{{elastic_report.assessment_time}}</td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+    </div>
+
+	<!-- Grade details -->
+    <div class="row">
+    <div class="col-md-12">
+	    <h3> Grade </h3>
+		<table class="table">
+		    <thead>
+			    <tr>
+				    <th>Name </th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr>
+				    <td>Grade</td>
+					<td>{{elastic_report.grade}}</td>
+				</tr>
+			    <tr>
+				    <td>Exceptional grade</td>
+					<td>{{elastic_report.grade_exceptional}}</td>
+				</tr>
+			    <tr>
+				    <td>Grade warnings</td>
+					<td>{{elastic_report.grade_warnings}}</td>
+				</tr>
+
+            </tbody>
+		</table>
+	</div>
+	</div>
+
+	<!-- Key parameter details -->
+    <div class="row">
+    <div class="col-md-12">
+	    <h3> Keys </h3>
+		<table class="table">
+		    <thead>
+			    <tr>
+				    <th>Name </th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr>
+				    <td>Key size</td>
+					<td>{{elastic_report.key_size}}</td>
+				</tr>
+			    <tr>
+				    <td>Key strength</td>
+					<td>{{elastic_report.key_strength}}</td>
+				</tr>
+			    <tr>
+				    <td>Key algorithm</td>
+					<td>{{elastic_report.key_algorithm}}</td>
+				</tr>
+			    <tr>
+                         	    <td>Supported ciphers</td>
+                                    <td> 
+                                        <ul>
+                                            {% for item in elastic_report.cipher_suites %}
+                                                <li> {{item.name}} </li>
+                                            {% endfor %}
+                                         </ul>
+                                    </td>
+			    </tr>
+
+            </tbody>
+		</table>
+	</div>
+	</div>
+	
+	<!-- Misc details -->
+    <div class="row">
+    <div class="col-md-12">
+	    <h3> Miscellaneous </h3>
+		<table class="table">
+		    <thead>
+			    <tr>
+				    <th>Name </th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr>
+				    <td>Domain delegation</td>
+					<td>{{elastic_report.domain_delegation}}</td>
+				</tr>
+			    <tr>
+				    <td>Session resumption</td>
+					<td>{{elastic_report.session_resumption}}</td>
+				</tr>
+			    <tr>
+				    <td>Session tickets support</td>
+					<td>{{elastic_report.session_tickets_support}}</td>
+				</tr>
+			    <tr>
+				    <td>Weak signature algorithm</td>
+					<td>{{elastic_report.sig_algorithm_weak}}</td>
+				</tr>
+
+            </tbody>
+		</table>
+	</div>
+	</div>
+
+	<!-- Renegotiation details -->
+    <div class="row">
+    <div class="col-md-12">
+	    <h3> Renegotiation support </h3>
+		<table class="table">
+		    <thead>
+			    <tr>
+				    <th>Name </th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr>
+				    <td>Secure renegotiation</td>
+					<td>{{elastic_report.secure_renegotiation}}</td>
+				</tr>
+    			<tr>
+				    <td>Secure renegotiation server support</td>
+					<td>{{elastic_report.secure_renegotiation_server_support}}</td>
+				</tr>
+			    <tr>
+				    <td>Secure client renegotiation</td>
+					<td>{{elastic_report.secure_client_renegotiation}}</td>
+				</tr>
+            </tbody>
+		</table>
+	</div>
+	</div>
+
+	<!-- Protocol support details -->
+    <div class="row">
+    <div class="col-md-12">
+	    <h3> Protocol support </h3>
+		<table class="table">
+		    <thead>
+			    <tr>
+				    <th>Name </th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr>
+				    <td>SNI support</td>
+					<td>{{elastic_report.SNI_support}}</td>
+				</tr>
+			    <tr>
+				    <td>NPN protocol support</td>
+					<td>{{elastic_report.npn_protocols_support}}</td>
+				</tr>
+			    <tr>
+				    <td>OCSP stapling support</td>
+					<td>{{elastic_report.ocsp_stapling_support}}</td>
+				</tr>
+			    <tr>
+				    <td>Forward secrecy support</td>
+					<td>{{elastic_report.forward_secrecy_support}}</td>
+				</tr>
+            </tbody>
+		</table>
+	</div>
+	</div>
+	
+	<!-- Certificate details -->
+	<div class="row">
+    <div class="col-md-12">
+         <h3> Certificate details </h3>
+
+        <table class="table">
+         <thead>
+             <tr>
+                 <th>Name</th>
+                 <th>Value</th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr>
+                 <td>Certificate alternate names</td>
+                 <td>{{elastic_report.cert_alt_names}}</td>
+             </tr>
+             <tr>
+                 <td>Certificate common names</td>
+                 <td>{{elastic_report.cert_common_names}}</td>
+             </tr>
+             <tr>
+                 <td>Certificate extended validation</td>
+                 <td>{{elastic_report.cert_extended_validation}} </td>
+             </tr>
+             <tr>
+                 <td>Certificate issuer label </td>
+                 <td>{{elastic_report.cert_issuer_label}}</td>
+             </tr>
+             <tr>
+                 <td>Certificate issuer subject </td>
+                 <td>{{elastic_report.cert_issuer_subject}} </td>
+             </tr>
+             <tr>
+                 <td>Certificate revocation status </td>
+                 <td>{{elastic_report.cert_revocation_status}}</td>
+             </tr>
+             <tr>
+                 <td>Certificate signature algorithm </td>
+                 <td>{{elastic_report.cert_signature_algo}}</td>
+             </tr>
+             <tr>
+                 <td>Certificate subject </td>
+                 <td>{{elastic_report.cert_subject}}</td>
+             </tr>
+             <tr>
+                 <td>Certificate validity </td>
+                 <td>{{elastic_report.cert_validity}} </td>
+             </tr>
+             <tr>
+                 <td>Certificate SCT support </td>
+                 <td>{{elastic_report.certificate_sct_support}} </td>
+             </tr>
+
+         </tbody>
+
+        </table>
+
+    </div>
+    </div>
+
+    <!-- Vulnerability details -->    
+        <h3> Vulnerability status </h3>
+	<div class="row">
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>Beast</h3>
+                        {{elastic_report.beast}}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>Crime</h3>
+                        {{elastic_report.crime}}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>Freak</h3>
+                        {{elastic_report.freak}}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>Heartbleed</h3>
+                        {{elastic_report.heartbleed}}
+                </div>
+            </div>
+
+        </div>		
+		
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>Logjam</h3>
+                        {{elastic_report.logjam}}
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>OpenSSL luckyminus</h3>
+                        {{elastic_report.openssl_luckyminus}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>OpenSSLCCS</h3>
+                        {{elastic_report.openssl_ccs}}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>Poodle</h3>
+                        {{elastic_report.poodle}}
+                </div>
+            </div>
+        </div>		
+		
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>PoodleTLS</h3>
+                        {{elastic_report.poodle_tls}}
+                </div>
+            </div>
+        </div>		
+
+        <div class="col-md-4">
+            <div class="metric">
+                <div class="value">
+                    <h3>Only RC4 support</h3>
+                        {{elastic_report.rc4_only}}
+                </div>
+            </div>
+        </div>		
+
+		
+    </div>
+	</div>
+	
+</div>
+
+</body>
+
+</html>
+

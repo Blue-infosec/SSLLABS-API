@@ -5,6 +5,6 @@ from wtforms.validators import DataRequired
 
 class SearchForm(Form):
     server = StringField('server', validators = [DataRequired()])
-    dt = DateField('Pick a date', format = '%d/%m/%Y')
+    dt = DateField('Date', format = '%Y-%m-%d')
 
 

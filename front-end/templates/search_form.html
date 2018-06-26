@@ -17,8 +17,8 @@
 <body>
     <form method="post" action="/search" name="search">
 	{{ form.hidden_tag() }}
-        <p> Server: {{ form.server(size=80) }} </p>
-	<p> Date: {{ form.dt(class="dtpick") }} </p>
+        <p> Server name: {{ form.server(size=80) }} </p>
+	<p> Date(yyyy-mm-dd): {{ form.dt(class="dtpick") }} </p>
 	<button type="submit"> Search </button>
 	</form>
 </body>
